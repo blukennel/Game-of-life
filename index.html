@@ -7,11 +7,21 @@
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="shapes.js"></script>
 </head>
-<body onload="start()">
-	<canvas id="root" width="1200" height="720" onclick="getPosition(event)"></canvas>
-	<input type="button" name="Step" value="step" onclick="act();">
-	<input type="button" name="Go" value="go" onclick="go();">
-	<div id="console">>></div>
+<body onload="create()">
+	<div id="left">
+		<canvas id="root" width="1200" height="720" onclick="getPosition(event)"></canvas>
+	</div>
+	<div id="right">
+		<div class="box"><input class="button" type="button" id="Step" value="step" onclick="step2()"></div>
+		<div class="box"><input class="button" type="button" id="start/stop" value="start" onclick="start()"></div>
+		<div class="box"><input class="button" type="button" id="clear" value="clear" onclick="reset()"></div>
+		<div class="box"><input class="button" type="button" id="glider" value="glider" onclick="glider(100,70)"></div>
+		<div class="box"><input class="button" type="button" id="xter" value="xter" onclick="xter(100,70,30)"></div>
+		<div id="console">>></div>
+	</div>
+
+
 </body>
 </html>

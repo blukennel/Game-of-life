@@ -1,10 +1,11 @@
 var arr = [];
 var resX = 1200;
 var resY = 720;
-var color = "yellow";
-var size = 10;
+var color = "lightblue";
+var size = 5;
 var canvas;
 var ctx;
+var timer;
 
 class node
 {
@@ -32,9 +33,19 @@ function remove(x,y)
 	ctx.fillStyle = "black";
 	ctx.fillRect(size*x, size*y, size, size);
 }
-function go()
+function stop()
 {
-	setInterval(act, 50);
+	timer = clearInterval(timer);
+	document.getElementById("start/stop").value="start";
+	document.getElementById("start/stop").setAttribute( "onClick", "javascript: start();");
+}
+function start()
+{
+	timer = clearInterval(timer);
+	setInterval(xter2,700); // =======================================
+	timer = setInterval(act,10);
+	document.getElementById("start/stop").value="stop";
+	document.getElementById("start/stop").setAttribute( "onClick", "javascript: stop();");
 }
 function act()
 {
@@ -59,7 +70,7 @@ function act()
 				remove(x,y);
 		}
 }
-function start()
+function create()
 {
 	canvas = document.getElementById("root");
 	ctx = canvas.getContext("2d");
@@ -70,7 +81,7 @@ function start()
 	for(x=0; x<resX/size+1; x++)
 		for(y=0; y<resY/size+1; y++)
 			arr[x][y] = new node();
-	render();
+	reset();
 }
 function getPosition(event)
 {
@@ -84,16 +95,13 @@ function getPosition(event)
 		remove(x,y);
 	else
 		add(x,y);
-	render();
 }
-function render()
+function reset()
 {
-	for(x=0; x<resX/size+1; x++)
-		for(y=0; y<resY/size+1; y++)
-			if(arr[x][y].state==true)
-				add(x,y);
-			else
-				remove(x,y);
+	stop();
+	for(x=0; x<resX/size; x++)
+		for(y=0; y<resY/size; y++)
+			remove(x,y);
 }
 function get_n()
 {
@@ -102,17 +110,27 @@ function get_n()
 		for(y=1; y<resY/size; y++)
 		{
 			n=0;
-			if(arr[x+1][y].state==true) n++;
-			if(arr[x-1][y].state==true) n++;
-			if(arr[x][y+1].state==true) n++;
-			if(arr[x][y-1].state==true) n++;
-			if(arr[x+1][y+1].state==true) n++;
-			if(arr[x-1][y-1].state==true) n++;
-			if(arr[x+1][y-1].state==true) n++;
-			if(arr[x-1][y+1].state==true) n++;
-			arr[x][y].n = n;
+			if(x == 0 || y == 0)
+				arr[x][y].n=0;
+			else if(x >= Math.floor(resX/size)-1 ||
+					y >= Math.floor(resY/size)-1)
+				arr[x][y].n=0;
+			else
+			{
+				if(arr[x+1][y].state==true) n++;
+				if(arr[x-1][y].state==true) n++;
+				if(arr[x][y+1].state==true) n++;
+				if(arr[x][y-1].state==true) n++;
+				if(arr[x+1][y+1].state==true) n++;
+				if(arr[x-1][y-1].state==true) n++;
+				if(arr[x+1][y-1].state==true) n++;
+				if(arr[x-1][y+1].state==true) n++;
+				arr[x][y].n = n;
+			}
 		}
 }
-
-
-
+function step2()
+{
+	stop();
+	act();
+}

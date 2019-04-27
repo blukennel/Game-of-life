@@ -1,30 +1,21 @@
-#container
+body
 {
-	background-color: #003366;
-	position: fixed;
-	margin: 0;
-	padding: 0px;
-	top: 0;
-	left: 0;
-	width: 1600px;
-	height: 100%;
+	background-color: grey;
 }
-#messageBox
+.button
 {
+	background-color: green;
+	font-size: 28px;
+	border: none;
 	color: white;
-	font-size: 26px;
-}
-#root
-{
-	background-color: #292923;
+	text-align: center;
+	padding: 10px 10px;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	margin: 4px 4px;
 }
 #left
-{
-	width: 1200px;
-	float: left;
-	background-color: black;
-}
-#right
 {
 	float: left;
 }
